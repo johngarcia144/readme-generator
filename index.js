@@ -8,71 +8,108 @@ function promptUser() {
   return inquirer.prompt([
     {
       type: "input",
-      name: "name",
-      message: "What is your name?"
+      message: "What is your user GitHub username?",
+      name: "username"
     },
     {
       type: "input",
-      name: "location",
-      message: "Where are you from?"
+      message: "What is your email?",
+      name: "email"
     },
     {
       type: "input",
-      name: "hobby",
-      message: "What is your favorite hobby?"
+      message: "What is the title of your project?",
+      name: "title"
     },
     {
       type: "input",
-      name: "food",
-      message: "What is your favorite food?"
+      message: "Please provide a description of your project.",
+      name: "description"
     },
     {
       type: "input",
-      name: "github",
-      message: "Enter your GitHub Username"
+      message: "What packages need to be installed to run your project.",
+      name: "installation"
     },
     {
       type: "input",
-      name: "linkedin",
-      message: "Enter your LinkedIn URL."
+      message: "What technologies were used to create your project.",
+      name: "technology"
+    },
+    {
+      type: "input",
+      message: "Please provide an example of how your project can be used.",
+      name: "usage"
+    },
+    {
+      type: "list",
+      name: "license",
+      message: "What kind of license would you like to have?",
+      name: "license",
+      choices: ["MIT", "APACHE 2.0", "GPL v3", "BSD 3", "None"]
+    },
+    {
+      type: "input",
+      message: "Including yourself, please list out all contributors",
+      name: "contributer"
+    },
+    {
+      type: "input",
+      message: "What command is used to run a test",
+      name: "tests",
     }
   ]);
 }
 
-function generateHTML(answers) {
+function generateMD(answers) {
+
+  const avatar = `https://github.com/${answers.username}.png?size=50`;
+  const gitHub = `https://img.shields.io/badge/Github-${answers.username}-4cbbb9`;
+
   return `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title>Document</title>
-</head>
-<body>
-  <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Hi! My name is ${answers.name}</h1>
-    <p class="lead">I am from ${answers.location}.</p>
-    <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
-    <ul class="list-group">
-      <li class="list-group-item">My GitHub username is ${answers.github}</li>
-      <li class="list-group-item">LinkedIn: ${answers.linkedin}</li>
-    </ul>
-  </div>
-</div>
-</body>
-</html>`;
+  # ${answers.title} 
+  
+  ## Description
+    ${answers.description}
+
+  ## Table of Contents
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [Tests](#tests)
+  - [Contributors](#contributors)
+  - [Details](#details)
+
+  ## Installation
+  Packages required to run this program are: ${answers.installation}
+  
+  ## Usage
+  Examples of how to use this program: ${answers.usage}
+
+  ## License
+  ${answers.license}
+
+  ## Tests
+  To test, run the following command: ${answers.tests}
+
+  ## Contributors
+  ${answers.contributer}
+
+  ## Contact
+  \n![Badge](${gitHub}) 
+  \n![Profile Image](${avatar})
+  \nIf you have any questions, contact the author directly at ${answers.email}.
+ `;
 }
 
 promptUser()
   .then(function(answers) {
-    const html = generateHTML(answers);
+    const text = generateMD(answers);
 
-    return writeFileAsync("README.md", markdown);
+    return writeFileAsync("README.md", text);
   })
   .then(function() {
-    console.log("Successfully wrote to index.html");
+    console.log("Successfully wrote to README.md");
   })
   .catch(function(err) {
     console.log(err);
