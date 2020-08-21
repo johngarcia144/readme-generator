@@ -1,8 +1,9 @@
 
-  # asdf 
+  # ReadMe Generator
   
   ## Description
-    asdf
+
+    This ReadMe generator begins by using node index.js in the integrated terminal, then uses a command-line application to dynamically generate a ReadMe.md file.
 
   ## Table of Contents
   - [Installation](#installation)
@@ -13,19 +14,19 @@
   - [Details](#details)
 
   ## Installation
-  Packages required to run this program are: asdf
+  Packages required to run this program are: inquirer
   
   ## Usage
-  Examples of how to use this program: asfd
+  Examples of how to use this program: To quickly create a README
 
   ## License
-  MIT
+  None
 
   ## Tests
-  To test, run the following command: asdf
+  To test, run the following command: N/A
 
   ## Contributors
-  adf
+  John Garcia
 
   ## Contact
   
@@ -36,4 +37,8 @@
 https://github.com/johngarcia144
   
 If you have any questions, contact the author directly at john.garcia144@gmail.com.
+
+## Demonstration
+
+![Readmegif](./ReadMe.gif)
  
