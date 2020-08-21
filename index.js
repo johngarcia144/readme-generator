@@ -98,6 +98,7 @@ function generateMD(answers) {
   ## Contact
   \n![Badge](${gitHub}) 
   \n![Profile Image](${avatar})
+  \nhttps://github.com/${answers.username}
   \nIf you have any questions, contact the author directly at ${answers.email}.
  `;
 }
